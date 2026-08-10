@@ -1,0 +1,122 @@
+// Use this file to overwrite the basic Bootstrap variables and add your own variables
+// To overwrite a Bootstrap variable you don´t have to touch the Bootstrap folder. 
+// Just copy a variable from /sass/bootstrap/_variables.scss, paste it here and edit the value.
+// As example you find one of the most important Bootstrap variable below: $brand-primary.
+// Thats the ugly Bootstrap blue used for all the links, primary buttons etc.
+// Just add your color code here, compile the theme.scss file to change this color everywhere
+
+
+//Container Width
+$container-width : rem(1140);
+
+// Colors
+$primary: #F8C620;
+$secondary: #551B1B;
+
+$white: #fff;
+$black: #000;
+$blue: #0072bb;
+$light-blue: #10b1d7;
+$medium-blue: #28628F;
+$lighter-blue: #0171bb;
+$dark-blue: #00334D;
+$dark-grey: #212121;
+$medium-gray: #666;
+$medium-md-gray: #6d6d6d;
+$gray: #444;
+$light-gray: #f7f7f7;
+$lighter-gray: #EFF4F8;
+$light-gray2:#E6EBF0;
+$orange: #d95000;
+$green: #62A139;
+$off-black: #1C1C1C;
+//Body Variables
+$body-bg : $white;
+$body-color: $black;
+$yellow: #F8C620;
+$light-yellow: #ECE8DF;
+$burgundy: #551B1B;
+
+
+// Link Colors
+$link-color: $burgundy;
+$link-decoration: none;
+$link-hover-color: $black;
+$link-hover-decoration: underline;
+
+
+// Typography
+$font-family-base: 			  'Cabin', sans-serif;
+$font-size-base:              rem(18) !default; // Assumes the browser default, typically `16px`
+$font-size-lg:                $font-size-base * 1.25 !default;
+$font-size-sm:                $font-size-base * .875 !default;
+
+$font-weight-lighter:         lighter !default;
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            700 !default;
+$font-weight-bolder:          bolder !default;
+
+$font-weight-base:            $font-weight-normal !default;
+$line-height-base:            1.5625 !default;
+
+$h1-font-size:                rem(45) !default;
+$h2-font-size:                rem(38) !default;
+$h3-font-size:                rem(34) !default;
+$h4-font-size:                rem(30) !default;
+$h5-font-size:                rem(26) !default;
+$h6-font-size:                rem(20) !default;
+
+$headings-font-family:        'Raleway', sans-serif !default;
+$headings-font-weight:        700 !default;
+$headings-line-height:        1.1778 !default;
+$headings-color:              $primary !default;
+
+$display1-size:               6rem !default;
+$display2-size:               5.5rem !default;
+$display3-size:               4.5rem !default;
+$display4-size:               3.5rem !default;
+
+$display1-weight:             300 !default;
+$display2-weight:             300 !default;
+$display3-weight:             300 !default;
+$display4-weight:             300 !default;
+$display-line-height:         $headings-line-height !default;
+
+$lead-font-size:              $font-size-base * 1.25 !default;
+$lead-font-weight:            300 !default;
+
+$small-font-size:             80% !default;
+
+$blockquote-small-font-size:  $small-font-size !default;
+$blockquote-font-size:        $font-size-base * 1.25 !default;
+
+/*Navigation Variables*/
+$nav-color: $black;
+$nav-hover-color: $black;
+$nav-spacing: rem(16.5) rem(20);
+$nav-font-size: rem(18);
+$nav-font-weight: 700;
+
+/*Darkbg color menu variables*/
+$navbar-dark-nav-color: $off-black;
+$navbar-dark-nav-hover-color: $off-black;
+
+$nav-subnav-width: rem(343);
+$nav-subnav-radius: 0;
+$nav-subnav-color: $black;
+$nav-subnav-bg-color: $light-yellow;
+$nav-subnav-hover-color: $off-black;
+$nav-subnav-hover-bg-color: $yellow;
+$nav-subnav-font-size: rem(18);
+$nav-subnav-font-weight: 400;
+$nav-subnav-spacing: rem(16.5) rem(20);
+
+/*============= Navigation Variables Mobile ==========*/
+$nav-spacing-mobile: rem(8.5) rem(50) rem(8.5) rem(30);
+$nav-subnav-spacing-mobile: rem(8.5) rem(50) rem(8.5) rem(60);
+
+/*============= TopLine Menu ==============*/
+$topnav-color: $white;
+$topnav-spacing: 0 rem(20);
+$topnav-font-size: rem(17);

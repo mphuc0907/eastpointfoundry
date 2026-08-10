@@ -1,0 +1,392 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20240509.185459.5188.0.001.json",
+    "dumpEventTime": "2024-05-09T18:54:59Z",
+    "dumpEventTimeStamp": "1715261099437",
+    "processId": 5188,
+    "cwd": "D:\\Sudarshan\\www.thomescanada.com\\wp-content\\themes\\thomescanada-default",
+    "commandLine": [
+      "node",
+      "D:\\Users\\stjadhav\\AppData\\Roaming\\npm\\\\node_modules\\gulp-cli\\bin\\gulp.js"
+    ],
+    "nodejsVersion": "v12.13.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.13.0",
+      "v8": "7.7.299.13-node.12",
+      "uv": "1.32.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.2",
+      "napi": "5",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019a",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.13.0/node-v12.13.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.13.0/node-v12.13.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.13.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.19045",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz",
+        "speed": 3000,
+        "user": 2649546,
+        "nice": 0,
+        "sys": 1865781,
+        "idle": 24260046,
+        "irq": 242718
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz",
+        "speed": 3000,
+        "user": 2898484,
+        "nice": 0,
+        "sys": 1592046,
+        "idle": 24284640,
+        "irq": 26671
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz",
+        "speed": 3000,
+        "user": 2856406,
+        "nice": 0,
+        "sys": 1229890,
+        "idle": 24688890,
+        "irq": 16125
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz",
+        "speed": 3000,
+        "user": 2931406,
+        "nice": 0,
+        "sys": 1250875,
+        "idle": 24592890,
+        "irq": 15171
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz",
+        "speed": 3000,
+        "user": 3133953,
+        "nice": 0,
+        "sys": 1419531,
+        "idle": 24221671,
+        "irq": 20250
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz",
+        "speed": 3000,
+        "user": 3123046,
+        "nice": 0,
+        "sys": 1462015,
+        "idle": 24190125,
+        "irq": 18046
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "Ethernet",
+        "internal": false,
+        "mac": "8c:ec:4b:bc:88:a2",
+        "address": "fe80::64c3:1404:71fd:9790",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 9
+      },
+      {
+        "name": "Ethernet",
+        "internal": false,
+        "mac": "8c:ec:4b:bc:88:a2",
+        "address": "192.168.18.61",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "TEPL-THN-WS382"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff798d11389",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+10873"
+    },
+    {
+      "pc": "0x00007ff798d157cc",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+28348"
+    },
+    {
+      "pc": "0x00007ff798d14778",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+24168"
+    },
+    {
+      "pc": "0x00007ff798e0332b",
+      "symbol": "v8::base::CPU::has_sse+37723"
+    },
+    {
+      "pc": "0x00007ff799606f4e",
+      "symbol": "v8::Isolate::ReportExternalAllocationLimitReached+94"
+    },
+    {
+      "pc": "0x00007ff7995eef91",
+      "symbol": "v8::SharedArrayBuffer::Externalize+833"
+    },
+    {
+      "pc": "0x00007ff7994bc85c",
+      "symbol": "v8::internal::Heap::EphemeronKeyWriteBarrierFromCode+1436"
+    },
+    {
+      "pc": "0x00007ff7994c7c00",
+      "symbol": "v8::internal::Heap::ProtectUnprotectedMemoryChunks+1312"
+    },
+    {
+      "pc": "0x00007ff7994c4734",
+      "symbol": "v8::internal::Heap::PageFlagsAreConsistent+3204"
+    },
+    {
+      "pc": "0x00007ff7994b9fc3",
+      "symbol": "v8::internal::Heap::CollectGarbage+1283"
+    },
+    {
+      "pc": "0x00007ff7994b8794",
+      "symbol": "v8::internal::Heap::AddRetainedMap+2356"
+    },
+    {
+      "pc": "0x00007ff7994d9a65",
+      "symbol": "v8::internal::Factory::NewFillerObject+53"
+    },
+    {
+      "pc": "0x00007ff799246239",
+      "symbol": "v8::internal::interpreter::JumpTableTargetOffsets::iterator::operator=+4057"
+    },
+    {
+      "pc": "0x00007ff799a32c6d",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+567949"
+    },
+    {
+      "pc": "0x00007ff799a33ba1",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+571841"
+    },
+    {
+      "pc": "0x00000168c1179497",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2174763008,
+    "totalCommittedMemory": 2174763008,
+    "usedMemory": 2138078272,
+    "availableMemory": 53212240,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 261872,
+        "used": 32296,
+        "available": 229576
+      },
+      "new_space": {
+        "memorySize": 29360128,
+        "committedMemory": 29360128,
+        "capacity": 14664832,
+        "used": 2917064,
+        "available": 11747768
+      },
+      "old_space": {
+        "memorySize": 2007609344,
+        "committedMemory": 2007609344,
+        "capacity": 2005123448,
+        "used": 2001605672,
+        "available": 3517776
+      },
+      "code_space": {
+        "memorySize": 1474560,
+        "committedMemory": 1474560,
+        "capacity": 1303776,
+        "used": 1303776,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 4984832,
+        "committedMemory": 4984832,
+        "capacity": 1361680,
+        "used": 1361680,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 131022848,
+        "committedMemory": 131022848,
+        "capacity": 130854232,
+        "used": 130854232,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 3552,
+        "used": 3552,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 14664832,
+        "used": 0,
+        "available": 14664832
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 947.406,
+    "kernelCpuSeconds": 832.859,
+    "cpuConsumptionPercent": 5.96644,
+    "maxRss": 2930843648,
+    "pageFaults": {
+      "IORequired": 12161013,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 19774,
+      "writes": 503
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "": "::=::\\",
+    "": "C:=C:\\Users\\stjadhav",
+    "": "D:=D:\\Sudarshan\\www.thomescanada.com\\wp-content\\themes\\thomescanada-default",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "D:\\Users\\stjadhav\\AppData\\Roaming",
+    "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "TEPL-THN-WS382",
+    "ComSpec": "C:\\WINDOWS\\system32\\cmd.exe",
+    "dp0": "D:\\Users\\stjadhav\\AppData\\Roaming\\npm\\",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\stjadhav",
+    "INIT_CWD": "D:\\Sudarshan\\www.thomescanada.com\\wp-content\\themes\\thomescanada-default",
+    "LOCALAPPDATA": "C:\\Users\\stjadhav\\AppData\\Local",
+    "LOGONSERVER": "\\\\TEPL-THN-SRV003",
+    "NUMBER_OF_PROCESSORS": "6",
+    "OneDrive": "C:\\Users\\stjadhav\\OneDrive - Technosoft Engineering Projects Ltd",
+    "OneDriveCommercial": "C:\\Users\\stjadhav\\OneDrive - Technosoft Engineering Projects Ltd",
+    "OS": "Windows_NT",
+    "Path": "D:\\Users\\stjadhav\\AppData\\Roaming\\npm;C:\\Program Files\\nodejs\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\Users\\admin\\AppData\\Roaming\\Filestar\\aliases;C:\\Program Files\\Git\\cmd;C:\\Program Files\\dotnet\\;C:\\Program Files\\nodejs\\;C:\\Users\\stjadhav\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\stjadhav\\AppData\\Local\\Programs\\Git\\cmd;C:\\Users\\stjadhav\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;D:\\Users\\stjadhav\\AppData\\Roaming\\npm",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "9e0a",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "SESSIONNAME": "Console",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\WINDOWS",
+    "TEMP": "C:\\Users\\stjadhav\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\stjadhav\\AppData\\Local\\Temp",
+    "USERDNSDOMAIN": "TITLTHANE.COM",
+    "USERDOMAIN": "TITLTHANE",
+    "USERDOMAIN_ROAMINGPROFILE": "TITLTHANE",
+    "USERNAME": "stjadhav",
+    "USERPROFILE": "C:\\Users\\stjadhav",
+    "windir": "C:\\WINDOWS",
+    "ZES_ENABLE_SYSMAN": "1",
+    "_prog": "node"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+    "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+    "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\system32\\hmpalert.dll",
+    "C:\\WINDOWS\\System32\\WS2_32.dll",
+    "C:\\WINDOWS\\System32\\RPCRT4.dll",
+    "C:\\WINDOWS\\System32\\ADVAPI32.dll",
+    "C:\\WINDOWS\\System32\\msvcrt.dll",
+    "C:\\WINDOWS\\System32\\sechost.dll",
+    "C:\\WINDOWS\\System32\\bcrypt.dll",
+    "C:\\WINDOWS\\System32\\USER32.dll",
+    "C:\\WINDOWS\\System32\\win32u.dll",
+    "C:\\WINDOWS\\System32\\GDI32.dll",
+    "C:\\WINDOWS\\System32\\gdi32full.dll",
+    "C:\\WINDOWS\\System32\\msvcp_win.dll",
+    "C:\\WINDOWS\\System32\\ucrtbase.dll",
+    "C:\\WINDOWS\\System32\\PSAPI.DLL",
+    "C:\\WINDOWS\\System32\\CRYPT32.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dbghelp.dll",
+    "C:\\WINDOWS\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\USERENV.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMM.dll",
+    "C:\\WINDOWS\\System32\\IMM32.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\powrprof.dll",
+    "C:\\WINDOWS\\SYSTEM32\\UMPDC.dll",
+    "C:\\WINDOWS\\system32\\uxtheme.dll",
+    "C:\\WINDOWS\\System32\\combase.dll",
+    "C:\\WINDOWS\\system32\\mswsock.dll",
+    "C:\\WINDOWS\\SYSTEM32\\kernel.appcore.dll",
+    "C:\\WINDOWS\\System32\\bcryptprimitives.dll",
+    "\\\\?\\D:\\Sudarshan\\www.thomescanada.com\\wp-content\\themes\\thomescanada-default\\node_modules\\node-sass\\vendor\\win32-x64-72\\binding.n",
+    "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\WINDOWS\\System32\\NSI.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\DNSAPI.dll",
+    "C:\\WINDOWS\\system32\\napinsp.dll",
+    "C:\\WINDOWS\\system32\\pnrpnsp.dll",
+    "C:\\WINDOWS\\system32\\NLAapi.dll",
+    "C:\\WINDOWS\\system32\\wshbth.dll",
+    "C:\\WINDOWS\\System32\\winrnr.dll"
+  ]
+}
