@@ -933,7 +933,20 @@
     var $header = $('#header-new');
     var $toggle = $('#header-new-mobile-toggle');
     var $mobileMenu = $('#header-new-mobile-menu');
-    var scrollThreshold = 100; // pixels before header becomes solid
+    var scrollThreshold = 50; // pixels before header becomes scrolled state
+    var isScrolled = false;
+
+    // Debounce helper for scroll events
+    function debounce(func, wait) {
+      var timeout;
+      return function() {
+        var context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+          func.apply(context, args);
+        }, wait);
+      };
+    }
 
     // Mobile menu toggle
     $toggle.on('click', function (e) {
@@ -962,16 +975,32 @@
       }
     });
 
-    // Header scroll behavior - add/remove is-scrolled class
+    // Header scroll behavior - add/remove is-scrolled class with debounce
     function updateHeaderOnScroll() {
-      if ($(window).scrollTop() > scrollThreshold) {
-        $header.addClass('is-scrolled');
-      } else {
-        $header.removeClass('is-scrolled');
+      var shouldBeScrolled = $(window).scrollTop() > scrollThreshold;
+
+      // Only toggle class when state changes (avoid unnecessary DOM updates)
+      if (shouldBeScrolled !== isScrolled) {
+        isScrolled = shouldBeScrolled;
+        if (isScrolled) {
+          $header.addClass('is-scrolled');
+        } else {
+          $header.removeClass('is-scrolled');
+        }
       }
     }
 
-    $(window).on('scroll', updateHeaderOnScroll);
+    // Throttled scroll handler - 16ms ≈ 60fps
+    var scrollTicking = false;
+    $(window).on('scroll', function() {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(function() {
+          updateHeaderOnScroll();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    });
 
     // Check on page load (in case user refreshes mid-page)
     updateHeaderOnScroll();
@@ -1073,20 +1102,19 @@
 
 
   jQuery(document).ready(function ($) {
-    // Footer Mobile Accordion
-    $(document).on('click', '.footer-new__accordion-header', function () {
-      var $header = $(this);
-      var $accordion = $header.closest('.footer-new__accordion');
-      var $content = $accordion.find('.footer-new__accordion-content');
-      var isExpanded = $header.attr('aria-expanded') === 'true';
+    // Footer EPF Mobile Accordion
+    $(document).on('click', '[data-footer-accordion-trigger]', function () {
+      var $trigger = $(this);
+      var $content = $trigger.closest('[data-footer-accordion-content]').find('[data-footer-accordion-panel]');
+      var isExpanded = $trigger.attr('aria-expanded') === 'true';
 
       if (isExpanded) {
         // Close
-        $header.attr('aria-expanded', 'false');
+        $trigger.attr('aria-expanded', 'false');
         $content.slideUp(300);
       } else {
         // Open
-        $header.attr('aria-expanded', 'true');
+        $trigger.attr('aria-expanded', 'true');
         $content.slideDown(300);
       }
     });

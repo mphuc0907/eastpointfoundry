@@ -1,54 +1,170 @@
-<section class="hero-homepage-new" id="hero_homepage_new<?php echo $i ?>">
-    <?php
-    $hhn_video = get_field('hhn_background_video');
-    $hhn_image = get_field('hhn_background');
-    ?>
-    <?php if ($hhn_video): ?>
-        <video class="hero-homepage-new__video" autoplay muted loop playsinline>
-            <source src="<?php echo $hhn_video; ?>" type="video/mp4">
+<?php
+/**
+ * Hero Homepage New - East Point Foundry
+ * Design Reference: Figma node 2117:4831 (PC) & 2137:1949 (Mobile)
+ */
+
+// ACF Field Names
+$hhn_background_type = get_field('hhn_background_type'); // 'image' or 'video'
+$hhn_background_image = get_field('hhn_background_image');
+$hhn_background_video = get_field('hhn_background_video');
+$hhn_eyebrow = get_field('hhn_eyebrow');
+$hhn_heading_line1 = get_field('hhn_heading_line1');
+$hhn_heading_line2 = get_field('hhn_heading_line2');
+$hhn_italic_words = get_field('hhn_italic_words');
+$hhn_subtitle = get_field('hhn_subtitle');
+$hhn_cta_primary = get_field('hhn_cta_primary');
+$hhn_cta_secondary = get_field('hhn_cta_secondary');
+
+// Trust bar items
+$hhn_trust_icon1 = get_field('hhn_trust_icon1');
+$hhn_trust_text1 = get_field('hhn_trust_text1');
+$hhn_trust_icon2 = get_field('hhn_trust_icon2');
+$hhn_trust_text2 = get_field('hhn_trust_text2');
+$hhn_trust_icon3 = get_field('hhn_trust_icon3');
+$hhn_trust_text3 = get_field('hhn_trust_text3');
+$hhn_trust_icon4 = get_field('hhn_trust_icon4');
+$hhn_trust_text4 = get_field('hhn_trust_text4');
+
+// Parse italic words into array
+$italic_words_array = !empty($hhn_italic_words) ? array_map('trim', explode(',', $hhn_italic_words)) : array();
+
+// Helper function to wrap words in italic spans
+function epf_wrap_italic_words($text, $italic_words) {
+    if (empty($italic_words) || empty($text)) {
+        return esc_html($text);
+    }
+
+    $words = preg_split('/(\s+)/', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
+    $result = '';
+
+    foreach ($words as $word) {
+        $clean_word = trim($word);
+        if (in_array($clean_word, $italic_words)) {
+            $result .= '<em>' . $word . '</em>';
+        } else {
+            $result .= $word;
+        }
+    }
+
+    return $result;
+}
+
+// Trust bar items array
+$trust_items = array(
+    array('icon' => $hhn_trust_icon1, 'text' => $hhn_trust_text1),
+    array('icon' => $hhn_trust_icon2, 'text' => $hhn_trust_text2),
+    array('icon' => $hhn_trust_icon3, 'text' => $hhn_trust_text3),
+    array('icon' => $hhn_trust_icon4, 'text' => $hhn_trust_text4),
+);
+
+// Background style
+$bg_style = '';
+if ($hhn_background_type === 'video' && !empty($hhn_background_video)) {
+    // Video background - handled via data attribute for JS
+    $bg_video_url = is_array($hhn_background_video) ? $hhn_background_video['url'] : $hhn_background_video;
+} elseif ($hhn_background_type === 'image' && !empty($hhn_background_image)) {
+    $bg_image_url = is_array($hhn_background_image) ? $hhn_background_image['url'] : $hhn_background_image;
+    $bg_style = 'background-image: url(' . esc_url($bg_image_url) . ');';
+}
+?>
+
+<section class="hero-banner" id="hero_banner" <?php echo ($hhn_background_type === 'video' && !empty($hhn_background_video)) ? 'data-hero-video="' . esc_url($bg_video_url) . '"' : ''; ?> style="<?php echo $bg_style; ?>">
+    <?php if ($hhn_background_type === 'video' && !empty($hhn_background_video)) : ?>
+        <video class="hero-banner__video" autoplay muted loop playsinline>
+            <source src="<?php echo esc_url($bg_video_url); ?>" type="video/mp4">
         </video>
-    <?php elseif ($hhn_image): ?>
-        <div class="hero-homepage-new__image" style="background-image: url(<?php echo $hhn_image; ?>);"></div>
     <?php endif; ?>
-    <div class="hero-homepage-new__overlay"></div>
-    <div class="hero-homepage-new__section">
-        <div class="hero-homepage-new__inner">
-            <div class="hero-homepage-new__content">
-                <div class="hero-homepage-new__text">
-                    <?php if (get_field('hhn_eyebrow')): ?>
-                        <p class="hero-homepage-new__eyebrow"><?php echo get_field('hhn_eyebrow'); ?></p>
+
+    <div class="hero-banner__overlay"></div>
+    <!-- Hero Content -->
+    <div class="hero-banner__content">
+        <div class="hero-banner__text-wrapper">
+            <?php if (!empty($hhn_eyebrow)) : ?>
+                <p class="hero-banner__eyebrow" data-aos="fade-up" data-aos-delay="100">
+                    <?php echo esc_html($hhn_eyebrow); ?>
+                </p>
+            <?php endif; ?>
+
+            <?php if (!empty($hhn_heading_line1) || !empty($hhn_heading_line2)) : ?>
+                <h1 class="hero-banner__heading">
+                    <?php if (!empty($hhn_heading_line1)) : ?>
+                        <span class="hero-banner__heading-line1" data-aos="fade-up" data-aos-delay="200">
+                            <?php echo esc_html($hhn_heading_line1); ?>
+                        </span>
+                    <?php endif; ?>
+                    
+                    <?php if (!empty($hhn_heading_line2)) : ?>
+                        <span class="hero-banner__heading-line2" data-aos="fade-up" data-aos-delay="300">
+                            <?php echo epf_wrap_italic_words($hhn_heading_line2, $italic_words_array); ?>
+                        </span>
+                    <?php endif; ?>
+                </h1>
+            <?php endif; ?>
+
+            <?php if (!empty($hhn_subtitle)) : ?>
+                <p class="hero-banner__subtitle" data-aos="fade-up" data-aos-delay="400">
+                    <?php echo esc_html($hhn_subtitle); ?>
+                </p>
+            <?php endif; ?>
+
+            <?php if (!empty($hhn_cta_primary) || !empty($hhn_cta_secondary)) : ?>
+                <div class="hero-banner__cta-wrapper" data-aos="fade-up" data-aos-delay="500">
+                    <?php if (!empty($hhn_cta_primary)) : ?>
+                        <a href="<?php echo esc_url($hhn_cta_primary['url']); ?>" 
+                           class="hero-banner__cta hero-banner__cta--primary"
+                           target="<?php echo esc_attr($hhn_cta_primary['target'] ?? '_self'); ?>">
+                            <?php echo esc_html($hhn_cta_primary['title']); ?>
+                        </a>
                     <?php endif; ?>
 
-                    <?php if (get_field('hhn_heading_line1') && get_field('hhn_heading_line2')): ?>
-                        <h1 class="hero-homepage-new__heading">
-                            <span class="hero-homepage-new__heading-line1"><?php echo get_field('hhn_heading_line1'); ?></span>
-                            <span class="hero-homepage-new__heading-line2"><?php echo get_field('hhn_heading_line2'); ?></span>
-                        </h1>
+                    <?php if (!empty($hhn_cta_secondary)) : ?>
+                        <a href="<?php echo esc_url($hhn_cta_secondary['url']); ?>" 
+                           class="hero-banner__cta hero-banner__cta--secondary"
+                           target="<?php echo esc_attr($hhn_cta_secondary['target'] ?? '_self'); ?>">
+                            <?php echo esc_html($hhn_cta_secondary['title']); ?>
+                        </a>
                     <?php endif; ?>
-
-                    <?php if (get_field('hhn_subtitle')): ?>
-                        <p class="hero-homepage-new__subtitle"><?php echo get_field('hhn_subtitle'); ?></p>
-                    <?php endif; ?>
-
-                    <div class="hero-homepage-new__cta">
-                        <?php
-                        $hhn_cta_primary = get_field('hhn_cta_primary');
-                        if ($hhn_cta_primary): ?>
-                            <a href="<?php echo esc_url($hhn_cta_primary['url']); ?>" class="hero-homepage-new__cta-btn hero-homepage-new__cta-btn--secondary" target="<?php echo esc_attr($hhn_cta_primary['target']); ?>">
-                                <?php echo esc_html($hhn_cta_primary['title']); ?>
-                            </a>
-                        <?php endif; ?>
-
-                        <?php
-                        $hhn_cta_secondary = get_field('hhn_cta_secondary');
-                        if ($hhn_cta_secondary): ?>
-                            <a href="<?php echo esc_url($hhn_cta_secondary['url']); ?>" class="hero-homepage-new__cta-btn hero-homepage-new__cta-btn--primary" target="<?php echo esc_attr($hhn_cta_secondary['target']); ?>">
-                                <?php echo esc_html($hhn_cta_secondary['title']); ?>
-                            </a>
-                        <?php endif; ?>
-                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
+    </div>
+
+    <!-- Trust Bar -->
+    <div class="hero-banner__trust-bar">
+        <?php 
+        $trust_count = 0;
+        foreach ($trust_items as $item) : 
+            $trust_count++;
+            if (empty($item['text'])) continue;
+        ?>
+            <?php if ($trust_count > 1) : ?>
+                <div class="hero-banner__trust-divider">
+                    <span class="hero-banner__trust-divider-line"></span>
+                </div>
+            <?php endif; ?>
+            
+            <div class="hero-banner__trust-item">
+                <?php if (!empty($item['icon']) && !empty($item['icon']['url'])) : ?>
+                    <div class="hero-banner__trust-icon">
+                        <img src="<?php echo esc_url($item['icon']['url']); ?>" 
+                             alt="<?php echo esc_attr($item['icon']['alt'] ?? ''); ?>"
+                             width="24" 
+                             height="24" />
+                    </div>
+                <?php endif; ?>
+                
+                <?php 
+                // Split text by newline to create 2-line format
+                $text_lines = explode("\n", $item['text']);
+                ?>
+                <p class="hero-banner__trust-text">
+                    <?php foreach ($text_lines as $index => $line) : ?>
+                        <?php echo esc_html(trim($line)); ?>
+                        <?php if ($index < count($text_lines) - 1) : ?><br><?php endif; ?>
+                    <?php endforeach; ?>
+                </p>
+            </div>
+        <?php endforeach; ?>
     </div>
 </section>

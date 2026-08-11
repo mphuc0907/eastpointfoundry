@@ -1,0 +1,161 @@
+---
+description: Qui tắc phát triển cho theme Eastpoint Foundry (eastpointfo-default)
+alwaysApply: true
+---
+
+# Qui Tắc Phát Triển — Eastpoint Foundry
+
+Theme đang phát triển: `themes/eastpointfo-default/` (chạy trên WordPress + ACF + Understrap).
+
+## Cấu Trúc File
+
+### 1. Theme Root
+- Đường dẫn theme: `themes/eastpointfo-default/`
+- Style chính: `themes/eastpointfo-default/css/theme.css`
+- File cấu hình build: `themes/eastpointfo-default/gulpfile.js` + `gulpconfig.json`
+
+### 2. Header & Footer
+- **Header mới** (Homepage New): `themes/eastpointfo-default/parts/shared/header-new.php`
+  - Được dispatcher gọi khi `is_page_template('homepage-new.php')` (xem `header.php`).
+  - Cấu trúc: logo (light + dark) + desktop nav (multi-level dropdown) + mobile menu + search popup + language switcher (GTranslate) + CTA button.
+  - Lấy menu WordPress theo name: `Menu home page new` (`wp_get_nav_menu_items('Menu home page new')`).
+  - ACF đang dùng:
+    - `global_company_logo_new` (image, `option`) → logo light
+    - `global_company_logo` (image, `option`) → logo dark
+    - `icon_menu_svg` (image, per menu item) → icon cho submenu item
+  - Render submenu từ `menu_item_parent` của WP menu — không hardcode menu.
+  - Google Fonts dùng riêng: **IBM Plex Sans**, **Stack Sans Text**.
+- **Footer mới** (Homepage New): `themes/eastpointfo-default/parts/shared/footer-new.php`
+  - Được dispatcher gọi khi `is_page_template('homepage-new.php')` (xem `footer.php`).
+  - Cấu trúc: mobile header (logo + tagline + contact) + mobile accordion nav + desktop columns nav (Brand | Products | Industries | Company) + bottom bar (disclaimer + copyright).
+  - Có 2 layout: mobile accordion (`data-accordion-group` / `data-accordion-trigger` / `data-accordion-content`) và desktop columns.
+  - ACF đang dùng:
+    - `global_company_logo_new` (image, `option`) → logo
+  - Hiện đang hardcode: số điện thoại, email, tagline, các link nav (`#`) — **TODO chuyển sang ACF** nếu cần.
+  - Class BEM: `footer-new__*` (container, mobile-header, mobile-nav, accordion, desktop-nav, brand, nav-column, nav-list, bottom, divider, v.v.).
+
+### 3. Homepage
+- File: `themes/eastpointfo-default/homepage-new.php` (Template Name: `Homepage New`)
+- Đây là page template mới cho trang chủ — sửa trực tiếp khi cần cập nhật cấu trúc homepage.
+
+### 4. Sections (Flexible Content)
+- File: `themes/eastpointfo-default/parts/shared/flexible-content.php`
+- Đọc kỹ format hiện tại trong file trước khi thêm.
+- **CHỈ THÊM MỚI** section ở cuối file — không sửa các section đã có (để tránh ảnh hưởng các trang đang dùng).
+- Mỗi section mới phải theo đúng cấu trúc `if (have_rows(...) )` / `while (have_rows(...))` đang dùng trong file.
+
+### 5. ACF Fields & Options
+- Sử dụng plugin ACF (Advanced Custom Fields).
+- Options page: dùng `'option'` làm second param (`get_field('field_name', 'option')`).
+- Các field global header/footer styles đặt trong Options page.
+
+---
+
+## CSS
+
+### Vị trí viết CSS
+- File SCSS modules: `themes/eastpointfo-default/css/theme/_modules.scss`
+- File SCSS variables/mixins: `themes/eastpointfo-default/css/theme/_variables.scss`, `_mixins.scss`
+- File SCSS header/footer/navigation/buttons: cùng thư mục `css/theme/`
+- **KHÔNG viết CSS trong** `css/sass/understrap/`, `css/sass/bootstrap4/`, `css/sass/fontawesome/`, `css/sass/underscores/` (đây là vendor).
+
+### Quy trình biên dịch (build tool: **gulp**)
+1. Viết CSS trong `_modules.scss` (hoặc partial phù hợp trong `css/theme/`).
+2. Chạy `gulp watch` để tự động compile.
+3. Kết quả:
+   - `css/theme.css` (source map: `css/theme.css.map`)
+   - `css/theme.min.css` (minified, source map: `css/theme.min.css.map`)
+4. Không có `theme.js` ở đây — JS build độc lập.
+
+### Nguyên tắc
+- **KHÔNG BAO GIỜ** sửa trực tiếp `css/theme.css`, `css/theme.min.css`, `css/theme.css.map`, `css/theme.min.css.map`.
+- Chỉ viết trong các file `.scss` partial trong `css/theme/`.
+- Mỗi khi thêm section / header / footer mới, phải thêm **comment ở đầu** phần style trong `_modules.scss` (hoặc partial tương ứng):
+```scss
+/* ============================================
+   SECTION: [Tên Section]
+   Mô tả: [Mô tả ngắn]
+   ============================================ */
+```
+- File `style.css` ở root theme chỉ chứa header comment của WordPress — **KHÔNG sửa**.
+
+---
+
+## JavaScript
+
+### Vị trí viết JS
+- File: `themes/eastpointfo-default/js/main.js`
+- Các plugin/vendor: `js/plugins.js`, `js/bootstrap4/`, `js/vendor/`, `js/skip-link-focus-fix.js` — **KHÔNG sửa**.
+
+### Quy trình biên dịch (build tool: **gulp**)
+1. Viết/thay đổi JS trong `js/main.js`.
+2. `gulp watch` tự động compile + concat + uglify → `js/production.min.js`.
+3. Browser tự reload nhờ `browser-sync` (config trong `gulpconfig.json`, proxy: `localhost/wordpress/`).
+
+### Nguyên tắc
+- **KHÔNG BAO GIỜ** sửa file `js/production.min.js`.
+- Chỉ thêm mới / sửa trong `js/main.js`.
+- Khi thêm tính năng mới (slider, dropdown header mới, search popup, v.v.), code phải được bọc trong jQuery `$(function(){ ... })` hoặc `DOMContentLoaded`.
+
+---
+
+## Deploy (SFTP)
+
+- Cấu hình SFTP nằm ở `.vscode/sftp.json`.
+- Server: WPEngine staging (`eastpointfostg.sftp.wpengine.com:2222`).
+- `remotePath`: `/wp-content` (do workspace root là `eastpointfoundry/`, các file trong `themes/eastpointfo-default/` sẽ upload đúng về `/wp-content/themes/eastpointfo-default/`).
+- **KHÔNG upload** các file: `.vscode/`, `.git/`, `node_modules/`, `package-lock.json`, `yarn.lock`, `report.*.json`, `screenshot.png`, `README.md`, `README.txt`, `CHANGELOG.md` (xem `.vscode/sftp.json`).
+- Upload thủ công: chuột phải file → `SFTP: Upload Active File`.
+
+---
+
+## Nguyên Tắc Quan Trọng
+
+| Loại | File | Hành động |
+|------|------|-----------|
+| PHP Homepage | `themes/eastpointfo-default/homepage-new.php` | Sửa / viết mới |
+| PHP Header dispatcher | `themes/eastpointfo-default/header.php` | Chỉ thêm case khi cần |
+| PHP Footer dispatcher | `themes/eastpointfo-default/footer.php` | Chỉ thêm case khi cần |
+| PHP Header mới (Homepage New) | `parts/shared/header-new.php` | Sửa — lấy menu từ WP `Menu home page new` |
+| PHP Footer mới (Homepage New) | `parts/shared/footer-new.php` | Sửa — đang hardcode nav, có thể chuyển sang menu WP |
+| PHP Header styles (cũ) | `parts/shared/header-style1.php` → `header-style5.php` | Chọn qua ACF `global_header_styles` |
+| PHP Footer styles (cũ) | `parts/shared/footer-style1.php` → `footer-style3.php` | Chọn qua ACF `global_foote_style` |
+| PHP Sections | `parts/shared/flexible-content.php` | **CHỈ THÊM MỚI** ở cuối, không sửa code cũ |
+| SCSS Header mới | `css/theme/_modules.scss` (block `/* HEADER NEW */`) | Viết mới + comment đầu |
+| SCSS Footer mới | `css/theme/_modules.scss` (block `/* FOOTER NEW */`) | Viết mới + comment đầu |
+| SCSS Source | `css/theme/_modules.scss` (và các partial trong `css/theme/`) | Viết mới + comment đầu section |
+| CSS Output | `css/theme.css`, `css/theme.min.css` (+ `.map`) | **KHÔNG SỬA** - auto compile |
+| CSS Root | `style.css` | **KHÔNG SỬA** (WordPress header) |
+| JS Source | `js/main.js` | Viết mới và sửa |
+| JS Output | `js/production.min.js` | **KHÔNG SỬA** - auto compile |
+
+---
+
+## Workflow Khi Phát Triển
+
+1. **Bắt đầu**: mở terminal tại `themes/eastpointfo-default/`, chạy `gulp` (= `gulp watch` + `gulp scripts`).
+2. **Viết PHP**: sửa file PHP tương ứng theo bảng trên.
+3. **Viết SCSS**: thêm vào `_modules.scss` với comment đầu section. Browser tự reload nhờ `gulp watch` + `browser-sync`.
+4. **Viết JS**: thêm vào `js/main.js`. Browser tự reload.
+5. **Kiểm tra trên browser** (proxy `localhost/wordpress/`).
+6. **Deploy**: chuột phải file cần upload → `SFTP: Upload Active File`. Sau khi upload, kiểm tra lại trên staging URL.
+
+---
+
+## Lưu Ý Riêng Cho Project Này
+
+- Theme dựa trên **Understrap** (WordPress starter theme).
+- Sử dụng **ACF** cho toàn bộ header/footer styles và options.
+- Có **AOS animation** (`unpkg.com/aos@2.3.1`) đã được nhúng trong `header.php`.
+- Google Fonts đang dùng:
+  - Toàn theme: **Raleway**, **Cabin** (nhúng trong `header.php`).
+  - Riêng `header-new.php`: **IBM Plex Sans**, **Stack Sans Text** (nhúng inline).
+- **GTranslate** shortcode: `[gt-link lang="en" label="English" widget_look="flags_name"]` — dùng cho language switcher (đang dùng trong `header-new.php`).
+- Hỗ trợ **WPML / Polylang** thông qua GTranslate — kiểm tra menu theo ngôn ngữ khi thêm menu mới.
+
+### Quy ước BEM khi code Header/Footer mới
+- Block root: `header-new` / `footer-new` (id tương ứng: `header-new`, `footer-new`).
+- Element: `block__element` (2 underscore) — ví dụ: `header-new__menu`, `header-new__menu-link`, `header-new__dropdown`, `footer-new__nav-column`, `footer-new__accordion`.
+- Modifier: `block__element--modifier` (2 dash) — ví dụ: `header-new__logo-img--dark`, `header-new__menu-item--dropdown`, `header-new__mobile-menu-item--cta`.
+- JS hook: dùng `data-*` attribute (ví dụ: `data-accordion-group`, `data-accordion-trigger`, `data-accordion-content`) — không gắn event vào class.
+- Khi thêm element mới, thêm style vào `_modules.scss` trong block comment `/* HEADER NEW */` hoặc `/* FOOTER NEW */`.
