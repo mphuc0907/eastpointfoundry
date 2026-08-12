@@ -928,6 +928,66 @@
     }
   });
 
+  // Industries Section Accordion (with image sync on PC)
+  $(document).on('click', '.industries-section__accordion [data-accordion-trigger]', function () {
+    var $item = $(this).closest('.industries-section__accordion-item');
+    var $accordion = $item.closest('.industries-section__accordion');
+    var $content = $item.find('.industries-section__accordion-content');
+    var $icon = $item.find('.industries-section__accordion-icon svg');
+    var index = $item.data('index');
+
+    if ($item.is('[data-open]')) {
+      // Close current item
+      $item.removeAttr('data-open');
+      $content.removeAttr('data-open').css({
+        'max-height': '0',
+        'opacity': '0',
+        'visibility': 'hidden'
+      });
+      $icon.css('transform', 'rotate(0deg)');
+    } else {
+      // Close all accordion items
+      $accordion.find('[data-open]').removeAttr('data-open');
+      $accordion.find('[data-accordion-content]').removeAttr('data-open').css({
+        'max-height': '0',
+        'opacity': '0',
+        'visibility': 'hidden'
+      });
+      $accordion.find('.industries-section__accordion-icon svg').css('transform', 'rotate(0deg)');
+
+      // Open clicked item
+      $item.attr('data-open', '');
+      $content.attr('data-open', '').css({
+        'max-height': '200px',
+        'opacity': '1',
+        'visibility': 'visible'
+      });
+      $icon.css('transform', 'rotate(45deg)');
+
+      // Sync image on desktop
+      if (window.innerWidth >= 992) {
+        var $imagesContainer = $accordion.siblings('.industries-section__images');
+        if ($imagesContainer.length) {
+          $imagesContainer.find('.industries-section__image-wrapper').removeClass('is-active');
+          $imagesContainer.find('[data-index="' + index + '"]').addClass('is-active');
+        }
+      }
+    }
+  });
+
+  // Initialize first image on page load for Industries Section
+  $(document).ready(function () {
+    $('.industries-section').each(function () {
+      var $imagesContainer = $(this).find('.industries-section__images');
+      var $firstItem = $(this).find('.industries-section__accordion-item[data-open]');
+      if ($imagesContainer.length && $firstItem.length) {
+        var index = $firstItem.data('index');
+        $imagesContainer.find('.industries-section__image-wrapper').removeClass('is-active');
+        $imagesContainer.find('[data-index="' + index + '"]').addClass('is-active');
+      }
+    });
+  });
+
   // Mobile Menu Toggle & Scroll Behavior
   jQuery(document).ready(function ($) {
     var $header = $('#header-new');
@@ -1519,4 +1579,21 @@ $(window).on('load', function () {
    Mô tả: JavaScript cho header navigation mới
    Bao gồm: Mobile menu + Scroll behavior (is-scrolled class)
    ============================================ */
+
+/* ============================================
+   TESTIMONIAL VIDEO SECTION
+   Mô tả: JavaScript cho video play button
+   ============================================ */
+$(document).on('click', '[data-play-video]', function () {
+  var $wrapper = $(this).closest('.testimonial-video-section__video-wrapper');
+  var $video = $wrapper.find('video');
+
+  if ($video.length) {
+    $video[0].play();
+    $(this).hide();
+    $video.on('pause ended', function () {
+      $wrapper.find('[data-play-video]').show();
+    });
+  }
+});
 

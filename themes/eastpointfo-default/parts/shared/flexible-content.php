@@ -3255,14 +3255,14 @@
 							<?php endforeach; ?>
 						</div>
 					<?php endif; ?>
-					
+
 				</div>
 				<div class="container-mobile">
 					<a href="<?php echo esc_url($gs_cta['url']); ?>" class="gallery-section__cta-mobile home-mobile" target="<?php echo esc_attr($gs_cta['target'] ?: '_self'); ?>">
 						<?php echo esc_html($gs_cta['title']); ?>
 					</a>
 				</div>
-				
+
 			</section>
 
 		<?php elseif (get_row_layout() == 'about_us_section'): ?>
@@ -3388,6 +3388,277 @@
 								<?php endif; ?>
 							</div>
 						</div>
+					</div>
+				</div>
+			</section>
+
+		<?php elseif (get_row_layout() == 'our_services_section'): ?>
+			<section class="our-services-section" id="our_services_section<?php echo $i ?>">
+				<div class="container">
+					<div class="our-services-section__header">
+						<div class="our-services-section__header-content">
+							<?php if (get_sub_field('oss_eyebrow')): ?>
+								<p class="our-services-section__eyebrow"><?php echo esc_html(get_sub_field('oss_eyebrow')); ?></p>
+							<?php endif; ?>
+							<?php if (get_sub_field('oss_heading')): ?>
+								<h2 class="our-services-section__heading"><?php echo esc_html(get_sub_field('oss_heading')); ?></h2>
+							<?php endif; ?>
+							<?php if (get_sub_field('oss_description')): ?>
+								<p class="our-services-section__description"><?php echo esc_html(get_sub_field('oss_description')); ?></p>
+							<?php endif; ?>
+						</div>
+						<?php $oss_cta = get_sub_field('oss_cta_button');
+						if ($oss_cta): ?>
+							<a href="<?php echo esc_url($oss_cta['url']); ?>" class="our-services-section__cta home-pc" target="<?php echo esc_attr($oss_cta['target'] ?: '_self'); ?>">
+								<span><?php echo esc_html($oss_cta['title']); ?></span>
+							</a>
+						<?php endif; ?>
+					</div>
+
+					<?php $oss_items = get_sub_field('oss_service_items');
+					if ($oss_items): ?>
+						<div class="our-services-section__grid">
+							<?php
+							$item_count = 0;
+							foreach ($oss_items as $item):
+								$item_count++;
+								$item_image = !empty($item['oss_item_image']) ? $item['oss_item_image'] : '';
+								$item_title = !empty($item['oss_item_title']) ? $item['oss_item_title'] : '';
+								$item_description = !empty($item['oss_item_description']) ? $item['oss_item_description'] : '';
+								$item_link = !empty($item['oss_item_link']) ? $item['oss_item_link'] : array('url' => '#', 'target' => '_self');
+								$item_link_target = !empty($item['oss_item_link']['target']) ? $item['oss_item_link']['target'] : '_self';
+
+								// Row 1: first 2 items (50% each), Row 2: remaining items (33.33% each)
+								$item_row_class = ($item_count <= 2) ? 'our-services-section__item--row1' : 'our-services-section__item--row2';
+							?>
+								<div class="our-services-section__item <?php echo esc_attr($item_row_class); ?>">
+									<a href="<?php echo esc_url($item_link['url'] ?: '#'); ?>" class="our-services-section__item-link" target="<?php echo esc_attr($item_link_target); ?>">
+										<div class="our-services-section__item-image">
+											<?php if ($item_image): ?>
+												<img src="<?php echo esc_url($item_image['url']); ?>" alt="<?php echo esc_attr($item_image['alt'] ?: $item_title); ?>" loading="lazy" />
+											<?php endif; ?>
+											<?php if ($item_description): ?>
+												<div class="our-services-section__item-overlay">
+													<p class="our-services-section__item-overlay-text"><?php echo wp_kses_post($item_description); ?></p>
+												</div>
+											<?php endif; ?>
+										</div>
+										<div class="our-services-section__item-content">
+											<div class="our-services-section__item-title-row">
+												<span class="our-services-section__item-title"><?php echo esc_html($item_title); ?></span>
+												<span class="our-services-section__item-arrow">
+													<svg xmlns="http://www.w3.org/2000/svg" width="15" height="11" viewBox="0 0 15 11" fill="none">
+														<path d="M14.32 5.25998L9.06005 10.52L7.94005 9.39998L11.8 5.53998L12.06 6.17998H4.88758e-05V4.35998H12.06L11.8 4.99998L7.94005 1.11998L9.06005 -2.47955e-05L14.32 5.25998Z" fill="#1A1613" />
+													</svg>
+												</span>
+											</div>
+											<div class="our-services-section__item-line">
+												<div class="line-separator"></div>
+											</div>
+										</div>
+									</a>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php if ($oss_cta): ?>
+						<div class="container-mobile">
+							<a href="<?php echo esc_url($oss_cta['url']); ?>" class="our-services-section__cta home-mobile" target="<?php echo esc_attr($oss_cta['target'] ?: '_self'); ?>">
+								<span><?php echo esc_html($oss_cta['title']); ?></span>
+							</a>
+						</div>
+					<?php endif; ?>
+				</div>
+			</section>
+
+		<?php elseif (get_row_layout() == 'industries_accordion'): ?>
+			<section class="industries-section" id="industries-section-<?php echo $i; ?>">
+				<div class="industries-section__container">
+					<div class="industries-section__header">
+						<div class="industries-section__titles">
+							<?php
+							$industry_eyebrow = get_sub_field('industry_eyebrow');
+							$industry_heading = get_sub_field('industry_heading');
+							$industry_heading_italic = get_sub_field('industry_heading_italic');
+							?>
+							<?php if ($industry_eyebrow): ?>
+								<p class="industries-section__eyebrow"><?php echo esc_html($industry_eyebrow); ?></p>
+							<?php endif; ?>
+							<?php if ($industry_heading || $industry_heading_italic): ?>
+								<h2 class="industries-section__heading">
+									<?php if ($industry_heading): ?>
+										<span class="industries-section__heading-normal"><?php echo esc_html($industry_heading); ?></span>
+									<?php endif; ?>
+									<?php if ($industry_heading_italic): ?>
+										<span class="industries-section__heading-italic"><?php echo esc_html($industry_heading_italic); ?></span>
+									<?php endif; ?>
+								</h2>
+							<?php endif; ?>
+						</div>
+						<?php
+						$industry_cta = get_sub_field('industry_cta');
+						if ($industry_cta): ?>
+							<a href="<?php echo esc_url($industry_cta['url']); ?>" class="industries-section__cta" target="<?php echo esc_attr($industry_cta['target'] ?: '_self'); ?>">
+								<span><?php echo esc_html($industry_cta['title']); ?></span>
+							</a>
+						<?php endif; ?>
+					</div>
+
+					<?php $industry_items = get_sub_field('industry_items'); ?>
+					<?php if ($industry_items): ?>
+						<div class="industries-section__content">
+							<div class="industries-section__images">
+								<?php foreach ($industry_items as $index => $item): ?>
+									<?php $item_image = !empty($item['industry_image']) ? $item['industry_image'] : ''; ?>
+									<div class="industries-section__image-wrapper" data-index="<?php echo $index; ?>">
+										<?php if ($item_image): ?>
+											<img src="<?php echo esc_url($item_image['url']); ?>" alt="<?php echo esc_attr($item_image['alt'] ?: 'Industry image'); ?>" loading="lazy" />
+										<?php endif; ?>
+									</div>
+								<?php endforeach; ?>
+							</div>
+							<div class="industries-section__accordion" data-accordion-group="industries-accordion">
+								<?php foreach ($industry_items as $index => $item): ?>
+									<?php
+									$item_title = !empty($item['industry_title']) ? $item['industry_title'] : '';
+									$item_content = !empty($item['industry_content']) ? $item['industry_content'] : '';
+									$is_first = ($index === 0);
+									?>
+									<div class="industries-section__accordion-item <?php echo $is_first ? 'is-active' : ''; ?>" data-accordion-item data-index="<?php echo $index; ?>" <?php echo $is_first ? 'data-open' : ''; ?>>
+										<button class="industries-section__accordion-trigger" data-accordion-trigger aria-expanded="<?php echo $is_first ? 'true' : 'false'; ?>">
+											<span class="industries-section__accordion-title"><?php echo esc_html($item_title); ?></span>
+											<span class="industries-section__accordion-icon">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" <?php echo $is_first ? 'style="transform: rotate(45deg);"' : ''; ?>>
+													<path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+												</svg>
+											</span>
+										</button>
+										<div class="industries-section__accordion-content" data-accordion-content>
+											<div class="industries-section__accordion-body">
+												<p><?php echo wp_kses_post($item_content); ?></p>
+											</div>
+										</div>
+									</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endif; ?>
+
+					<?php
+					$industry_mobile_cta = get_sub_field('industry_mobile_cta');
+					if ($industry_mobile_cta): ?>
+						<div class="industries-section__mobile-cta">
+							<a href="<?php echo esc_url($industry_mobile_cta['url']); ?>" class="industries-section__cta industries-section__cta--mobile" target="<?php echo esc_attr($industry_mobile_cta['target'] ?: '_self'); ?>">
+								<span><?php echo esc_html($industry_mobile_cta['title']); ?></span>
+							</a>
+						</div>
+					<?php endif; ?>
+				</div>
+			</section>
+
+		<?php elseif (get_row_layout() == 'about_section'): ?>
+			<section class="about-section" id="about-section-<?php echo $i; ?>">
+				<div class="about-section__container">
+					<div class="about-section__content">
+						<div class="about-section__header">
+							<?php
+							$about_eyebrow = get_sub_field('about_eyebrow');
+							$about_heading = get_sub_field('about_heading');
+							?>
+							<?php if ($about_eyebrow): ?>
+								<p class="about-section__eyebrow"><?php echo esc_html($about_eyebrow); ?></p>
+							<?php endif; ?>
+							<?php if ($about_heading): ?>
+								<h2 class="about-section__heading"><?php echo esc_html($about_heading); ?></h2>
+							<?php endif; ?>
+						</div>
+
+						<?php
+						$about_text = get_sub_field('about_paragraphs');
+						if ($about_text): ?>
+							<div class="about-section__text">
+								<?php echo wp_kses_post($about_text); ?>
+							</div>
+						<?php endif; ?>
+
+						<?php
+						$about_cta = get_sub_field('about_cta');
+						if ($about_cta): ?>
+							<a href="<?php echo esc_url($about_cta['url']); ?>" class="about-section__cta" target="<?php echo esc_attr($about_cta['target'] ?: '_self'); ?>">
+								<span><?php echo esc_html($about_cta['title']); ?></span>
+							</a>
+						<?php endif; ?>
+
+						<div class="about-section__divider">
+							<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1'%3E%3Cline x1='0' y1='0.5' x2='1920' y2='0.5' stroke='%23ad8831' stroke-width='1'/%3E%3C/svg%3E" alt="" />
+						</div>
+
+						<?php
+						$about_stats = get_sub_field('about_stats');
+						if ($about_stats): ?>
+							<div class="about-section__stats">
+								<?php foreach ($about_stats as $stat): ?>
+									<?php
+									$stat_value = !empty($stat['stat_value']) ? $stat['stat_value'] : '';
+									$stat_label = !empty($stat['stat_label']) ? $stat['stat_label'] : '';
+									?>
+									<div class="about-section__stat">
+										<span class="about-section__stat-value"><?php echo esc_html($stat_value); ?></span>
+										<span class="about-section__stat-label"><?php echo esc_html($stat_label); ?></span>
+									</div>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
+					</div>
+
+					<?php
+					$about_image = get_sub_field('about_images');
+					if ($about_image): ?>
+						<div class="about-section__images">
+							<img src="<?php echo esc_url($about_image['url']); ?>" alt="<?php echo esc_attr($about_image['alt'] ?: 'About image'); ?>" loading="lazy" />
+						</div>
+					<?php endif; ?>
+				</div>
+			</section>
+
+		<?php endif; ?>
+
+		<?php elseif (get_row_layout() == 'testimonial_video_section'): ?>
+			<section class="testimonial-video-section" id="testimonial-video-<?php echo $i; ?>">
+				<div class="testimonial-video-section__container">
+					<?php
+					$video_heading = get_sub_field('video_heading');
+					$video_heading_italic = get_sub_field('video_heading_italic');
+					?>
+					<?php if ($video_heading || $video_heading_italic): ?>
+						<h2 class="testimonial-video-section__heading">
+							<span><?php echo esc_html($video_heading); ?></span>
+							<?php if ($video_heading_italic): ?>
+								<span class="testimonial-video-section__heading-italic"><?php echo esc_html($video_heading_italic); ?></span>
+							<?php endif; ?>
+						</h2>
+					<?php endif; ?>
+
+					<div class="testimonial-video-section__video-wrapper">
+						<?php
+						$video_url = get_sub_field('video_url');
+						$video_poster = get_sub_field('video_poster');
+						?>
+						<?php if ($video_url): ?>
+							<video 
+								class="testimonial-video-section__video"
+								src="<?php echo esc_url($video_url); ?>"
+								poster="<?php echo esc_url($video_poster['url'] ?? ''); ?>"
+								preload="metadata"
+								playsinline
+							></video>
+						<?php endif; ?>
+						<button class="testimonial-video-section__play-btn" data-play-video aria-label="Play video">
+							<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M12 8.5L24 16L12 23.5V8.5Z" fill="white"/>
+							</svg>
+						</button>
 					</div>
 				</div>
 			</section>
