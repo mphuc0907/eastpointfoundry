@@ -3204,7 +3204,7 @@
 								<p class="gallery-section__eyebrow"><?php echo esc_html(get_sub_field('gs_eyebrow')); ?></p>
 							<?php endif; ?>
 							<?php if (get_sub_field('gs_heading')): ?>
-								<h2 class="gallery-section__heading"><?php echo esc_html(get_sub_field('gs_heading')); ?></h2>
+								<h2 class="gallery-section__heading"><?php echo get_sub_field('gs_heading'); ?></h2>
 							<?php endif; ?>
 						</div>
 						<?php $gs_cta = get_sub_field('gs_cta_button');
@@ -3243,14 +3243,16 @@
 											</div>
 										<?php endif; ?>
 									</div>
-									<div class="gallery-section__item-content">
-										<div class="gallery-section__item-title-row">
-											<h3 class="gallery-section__item-title"><?php echo esc_html($item['gs_item_title']); ?></h3>
+									<?php if (!empty($item['gs_item_title'])): ?>
+										<div class="gallery-section__item-content">
+											<div class="gallery-section__item-title-row">
+												<h3 class="gallery-section__item-title"><?php echo esc_html($item['gs_item_title']); ?></h3>
+											</div>
+											<div class="gallery-section__item-line">
+												<img src="<?php echo get_template_directory_uri(); ?>/img/line-separator.svg" alt="" />
+											</div>
 										</div>
-										<div class="gallery-section__item-line">
-											<img src="<?php echo get_template_directory_uri(); ?>/img/line-separator.svg" alt="" />
-										</div>
-									</div>
+									<?php endif; ?>
 								</div>
 							<?php endforeach; ?>
 						</div>
@@ -3356,22 +3358,22 @@
 				<div class="container">
 					<div class="contact-inquiry-section__inner">
 						<div class="contact-inquiry-section__info">
-							<div class="contact-inquiry-section__info-content" style="background-image: linear-gradient(90deg, rgba(77, 97, 69, 0.15) 0%, rgba(77, 97, 69, 0.15) 100%), linear-gradient(90deg, #f5f2ed 0%, #f5f2ed 100%);">
+							<div class="contact-inquiry-section__info-content">
 								<div class="contact-inquiry-section__intro">
 									<p class="contact-inquiry-section__eyebrow"><?php echo esc_html(get_sub_field('ci_eyebrow') ?: 'CONTACT'); ?></p>
 									<h2 class="contact-inquiry-section__heading"><?php echo esc_html(get_sub_field('ci_heading') ?: 'Get in touch'); ?></h2>
-									<p class="contact-inquiry-section__desc"><?php echo esc_html(get_sub_field('ci_description') ?: 'Whether you need a quote on a specific product, have a technical question about your application, or want to explore a long-term supply partnership — our team is here. We typically respond within one business day.'); ?></p>
+									<p class="contact-inquiry-section__desc"><?php echo (get_sub_field('ci_description') ?: 'Whether you need a quote on a specific product, have a technical question about your application, or want to explore a long-term supply partnership — our team is here. We typically respond within one business day.'); ?></p>
 								</div>
 								<div class="contact-inquiry-section__contact-details">
 									<div class="line-separator"></div>
 									<div class="contact-inquiry-section__detail-item">
-										<p class="contact-inquiry-section__detail-label">Email</p>
-										<a href="mailto:<?php echo esc_html(get_sub_field('ci_email') ?: 'info@thomesnorthamerica.com'); ?>" class="contact-inquiry-section__detail-value"><?php echo esc_html(get_sub_field('ci_email') ?: 'info@thomesnorthamerica.com'); ?></a>
+										<p class="contact-inquiry-section__detail-label">Call Us</p>
+										<a href="tel:<?php echo esc_html(get_sub_field('ci_phone') ?: '+1 905 623-9888'); ?>" class="contact-inquiry-section__detail-value"><?php echo esc_html(get_sub_field('ci_phone') ?: '+1 905 623-9888'); ?></a>
 									</div>
 									<div class="line-separator"></div>
 									<div class="contact-inquiry-section__detail-item">
-										<p class="contact-inquiry-section__detail-label">Phone</p>
-										<a href="tel:<?php echo esc_html(get_sub_field('ci_phone') ?: '+1 905 623-9888'); ?>" class="contact-inquiry-section__detail-value"><?php echo esc_html(get_sub_field('ci_phone') ?: '+1 905 623-9888'); ?></a>
+										<p class="contact-inquiry-section__detail-label">Email Us</p>
+										<a href="mailto:<?php echo esc_html(get_sub_field('ci_email') ?: 'info@thomesnorthamerica.com'); ?>" class="contact-inquiry-section__detail-value"><?php echo esc_html(get_sub_field('ci_email') ?: 'info@thomesnorthamerica.com'); ?></a>
 									</div>
 								</div>
 							</div>
@@ -3381,7 +3383,7 @@
 								<?php
 								$gravity_form_id = get_sub_field('ci_gravity_form_id');
 								if ($gravity_form_id):
-									echo do_shortcode('[gravityform id="13" title="false" description="false" ajax="true"]');
+									echo do_shortcode('[gravityform id="1" title="false" description="false" ajax="true"]');
 								else:
 								?>
 									<p class="contact-inquiry-section__form-placeholder"><?php esc_html_e('Please select a Gravity Form in the page editor.', 'thomescanada'); ?></p>
@@ -3585,13 +3587,13 @@
 						<?php
 						$about_cta = get_sub_field('about_cta');
 						if ($about_cta): ?>
-							<a href="<?php echo esc_url($about_cta['url']); ?>" class="about-section__cta" target="<?php echo esc_attr($about_cta['target'] ?: '_self'); ?>">
+							<a href="<?php echo esc_url($about_cta['url']); ?>" class="about-section__cta home-pc" target="<?php echo esc_attr($about_cta['target'] ?: '_self'); ?>">
 								<span><?php echo esc_html($about_cta['title']); ?></span>
 							</a>
 						<?php endif; ?>
 
 						<div class="about-section__divider">
-							<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1'%3E%3Cline x1='0' y1='0.5' x2='1920' y2='0.5' stroke='%23ad8831' stroke-width='1'/%3E%3C/svg%3E" alt="" />
+							<div class="line-separator"></div>
 						</div>
 
 						<?php
@@ -3610,6 +3612,16 @@
 								<?php endforeach; ?>
 							</div>
 						<?php endif; ?>
+						<div class="about-section__divider home-mobile">
+							<div class="line-separator"></div>
+						</div>
+						<?php
+						$about_cta = get_sub_field('about_cta');
+						if ($about_cta): ?>
+							<a href="<?php echo esc_url($about_cta['url']); ?>" class="about-section__cta home-mobile" target="<?php echo esc_attr($about_cta['target'] ?: '_self'); ?>">
+								<span><?php echo esc_html($about_cta['title']); ?></span>
+							</a>
+						<?php endif; ?>
 					</div>
 
 					<?php
@@ -3620,9 +3632,12 @@
 						</div>
 					<?php endif; ?>
 				</div>
+				<?php if ($about_image): ?>
+					<div class="about-section__images--mobile">
+						<img src="<?php echo esc_url($about_image['url']); ?>" alt="<?php echo esc_attr($about_image['alt'] ?: 'About image'); ?>" loading="lazy" />
+					</div>
+				<?php endif; ?>
 			</section>
-
-		<?php endif; ?>
 
 		<?php elseif (get_row_layout() == 'testimonial_video_section'): ?>
 			<section class="testimonial-video-section" id="testimonial-video-<?php echo $i; ?>">
@@ -3643,23 +3658,141 @@
 					<div class="testimonial-video-section__video-wrapper">
 						<?php
 						$video_url = get_sub_field('video_url');
+						$video_file = get_sub_field('video_file');
 						$video_poster = get_sub_field('video_poster');
+						$video_source = $video_file ?: $video_url;
 						?>
-						<?php if ($video_url): ?>
-							<video 
+						<?php if ($video_source): ?>
+							<video
 								class="testimonial-video-section__video"
-								src="<?php echo esc_url($video_url); ?>"
+								src="<?php echo esc_url($video_source['url'] ?? $video_source); ?>"
 								poster="<?php echo esc_url($video_poster['url'] ?? ''); ?>"
 								preload="metadata"
-								playsinline
-							></video>
+								playsinline></video>
 						<?php endif; ?>
 						<button class="testimonial-video-section__play-btn" data-play-video aria-label="Play video">
-							<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M12 8.5L24 16L12 23.5V8.5Z" fill="white"/>
+							<svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
+								<path d="M28.6643 12.523C29.3074 12.865 29.8453 13.3755 30.2204 13.9998C30.5955 14.6241 30.7936 15.3387 30.7936 16.067C30.7936 16.7954 30.5955 17.51 30.2204 18.1343C29.8453 18.7586 29.3074 19.2691 28.6643 19.6111L11.5105 28.9391C8.74834 30.4413 5.35559 28.4866 5.35559 25.3964V6.739C5.35559 3.64616 8.74834 1.69272 11.5105 3.19362L28.6643 12.523Z" fill="white" />
 							</svg>
 						</button>
 					</div>
+				</div>
+			</section>
+
+		<?php elseif (get_row_layout() == 'client_testimonials_section'): ?>
+			<?php
+			$testimonials = get_sub_field('testimonials_repeater');
+			$total_testimonials = is_array($testimonials) ? count($testimonials) : 0;
+			?>
+			<section class="client-testimonials-section" id="client-testimonials-<?php echo $i; ?>">
+				<div class="client-testimonials-section__bg">
+					<?php $bg_image = get_sub_field('background_image'); ?>
+					<?php if ($bg_image): ?>
+						<img src="<?php echo esc_url($bg_image['url']); ?>" alt="" loading="lazy" />
+					<?php endif; ?>
+				</div>
+				<div class="client-testimonials-section__container">
+					<div class="client-testimonials-section__header">
+						<?php
+						$eyebrow = get_sub_field('eyebrow_text');
+						$heading = get_sub_field('section_heading');
+						?>
+						<?php if ($eyebrow): ?>
+							<p class="client-testimonials-section__eyebrow"><?php echo esc_html($eyebrow); ?></p>
+						<?php endif; ?>
+						<?php if ($heading): ?>
+							<h2 class="client-testimonials-section__heading"><?php echo esc_html($heading); ?></h2>
+						<?php endif; ?>
+					</div>
+
+					<div class="client-testimonials-section__slider-wrapper" role="region" aria-label="Testimonials carousel">
+						<div class="client-testimonials-section__slider mySwiper swiper" aria-live="polite">
+							<div class="client-testimonials-section__slider-track swiper-wrapper" role="list">
+								<?php if (have_rows('testimonials_repeater')): ?>
+									<?php while (have_rows('testimonials_repeater')): the_row(); ?>
+										<div class="client-testimonials-section__slide swiper-slide" role="listitem">
+											<div class="client-testimonials-section__card">
+												<p class="client-testimonials-section__quote">
+													"<?php echo esc_html(get_sub_field('quote_text')); ?>"
+												</p>
+												<p class="client-testimonials-section__author">
+													-<?php echo esc_html(get_sub_field('author_name')); ?>
+												</p>
+											</div>
+										</div>
+									<?php endwhile; ?>
+								<?php endif; ?>
+							</div>
+							<div class="swiper-button-next client-testimonials-section__nav client-testimonials-section__nav--next" aria-label="Next testimonial">
+								<div class="client-testimonials-section__nav-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+										<path d="M15 30L25 20L15 10" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</div>
+							</div>
+							<div class="swiper-button-prev client-testimonials-section__nav client-testimonials-section__nav--prev" aria-label="Previous testimonial">
+								<div class="client-testimonials-section__nav-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+										<path d="M25 30L15 20L25 10" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</div>
+							</div>
+							<div class="swiper-pagination client-testimonials-section__dots" role="tablist" aria-label="Testimonial navigation"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		<?php elseif (get_row_layout() == 'faq_section_new'): ?>
+			<section class="faq-section-new" id="faq-section-new-<?php echo $i; ?>">
+				<div class="faq-section-new__container">
+					<div class="faq-section-new__left">
+						<div class="faq-section-new__header">
+							<h2 class="faq-section-new__heading"><?php echo esc_html(get_sub_field('faq_heading')); ?></h2>
+							<?php if (get_sub_field('faq_subheading')): ?>
+								<p class="faq-section-new__subheading"><?php echo esc_html(get_sub_field('faq_subheading')); ?></p>
+							<?php endif; ?>
+						</div>
+						<?php
+						$cta_link = get_sub_field('faq_cta_link');
+						?>
+						<?php if ($cta_link && !empty($cta_link['url'])): ?>
+							<a href="<?php echo esc_url($cta_link['url']); ?>" class="faq-section-new__cta home-pc" target="<?php echo esc_attr($cta_link['target'] ?? '_self'); ?>">
+								<?php echo esc_html($cta_link['title'] ?: 'Contact Us'); ?>
+							</a>
+						<?php endif; ?>
+					</div>
+
+					<div class="faq-section-new__accordion" data-faq-accordion>
+						<?php if (have_rows('faq_items')):
+							$faq_index = 0;
+							while (have_rows('faq_items')) : the_row();
+								$faq_index++;
+								$is_open = false; // All closed on load
+						?>
+								<div class="faq-section-new__accordion-item" <?php echo $is_open ? 'data-opens' : ''; ?>>
+									<button class="faq-section-new__accordion-header" data-faq-accordion-trigger aria-expanded="<?php echo $is_open ? 'true' : 'false'; ?>">
+										<span class="faq-section-new__accordion-title"><?php echo esc_html(get_sub_field('faq_question')); ?></span>
+										<span class="faq-section-new__accordion-icon">
+											<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+												<path class="faq-icon-horizontal" d="M18 9C18 9.41394 17.6639 9.75 17.25 9.75H9.75V17.25C9.75 17.6639 9.41394 18 9 18C8.58606 18 8.25 17.6639 8.25 17.25V9.75H0.75C0.336064 9.75 0 9.41394 0 9C0 8.58606 0.336064 8.25 0.75 8.25H8.25V0.75C8.25 0.336064 8.58606 0 9 0C9.41394 0 9.75 0.336064 9.75 0.75V8.25H17.25C17.6639 8.25 18 8.58606 18 9Z" fill="currentColor" />
+											</svg>
+										</span>
+									</button>
+									<div class="faq-section-new__accordion-content" data-faq-accordion-content <?php echo $is_open ? 'data-opens' : ''; ?>>
+										<div class="faq-section-new__accordion-inner">
+											<p><?php echo wp_kses_post(get_sub_field('faq_answer')); ?></p>
+										</div>
+									</div>
+								</div>
+						<?php endwhile;
+						endif; ?>
+					</div>
+					<?php if ($cta_link && !empty($cta_link['url'])): ?>
+							<a href="<?php echo esc_url($cta_link['url']); ?>" class="faq-section-new__cta home-mobile" target="<?php echo esc_attr($cta_link['target'] ?? '_self'); ?>">
+								<?php echo esc_html($cta_link['title'] ?: 'Contact Us'); ?>
+							</a>
+					<?php endif; ?>
 				</div>
 			</section>
 

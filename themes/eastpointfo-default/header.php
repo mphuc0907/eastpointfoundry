@@ -54,7 +54,8 @@ $container = get_theme_mod('understrap_container_type');
 	<link rel="preload" as="image" href="https://thomesnorthamerica.com/wp-content/uploads/Hero-2-1.webp">
 	<link rel="preload" as="image" href="https://thomesnorthamerica.com/wp-content/uploads/Melamine-Birch-Kitchen-Cabinets-min.webp">
 	<link rel="preload" as="image" href="https://thomesnorthamerica.com/wp-content/uploads/hero-bg-img-1.webp">
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 
 	<?php wp_head(); ?>
 
@@ -117,7 +118,7 @@ $container = get_theme_mod('understrap_container_type');
 		<?php if (is_front_page()) : ?>
 			<!--Site intro container start-->
 			<?php get_template_part('parts/site-intro'); ?>
-			<!--Site intro container end-->	
+			<!--Site intro container end-->
 		<?php elseif (is_page_template('homepage-new.php')) : ?>
 			<?php get_template_part('parts/site-intro-new'); ?>
 		<?php else : ?>

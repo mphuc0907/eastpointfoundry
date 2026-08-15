@@ -19,6 +19,10 @@
     "url": "https://bitbucket.org/thomasnetrpm/rpm-understrap-framework"
   },
   "homepage": "https://rpmunderstrap.wpengine.com/",
+  "scripts": {
+    "styles": "node --max-old-space-size=8192 node_modules/gulp/bin/gulp.js styles",
+    "watch": "node --max-old-space-size=8192 node_modules/gulp/bin/gulp.js watch"
+  },
   "dependencies": {
     "bootstrap": "^4.3.1",
     "del": "^4.1.0",

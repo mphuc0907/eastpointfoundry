@@ -160,7 +160,7 @@ if ($hhn_background_type === 'video' && !empty($hhn_background_video)) {
                 ?>
                 <p class="hero-banner__trust-text">
                     <?php foreach ($text_lines as $index => $line) : ?>
-                        <?php echo esc_html(trim($line)); ?>
+                        <?php echo trim($line); ?>
                         <?php if ($index < count($text_lines) - 1) : ?><br><?php endif; ?>
                     <?php endforeach; ?>
                 </p>

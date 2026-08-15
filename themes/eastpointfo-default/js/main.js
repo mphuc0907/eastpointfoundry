@@ -337,7 +337,6 @@
         }
       ]
     });
-
     $('.inner-wg_slider_item').each(function () { // iterate over unordered list placed inside '.my_gallery' div
       $(this).magnificPopup({
         delegate: '.lightbox2', // the select all except hidden ones
@@ -367,8 +366,6 @@
         $('.si-slider .slick-current').find('a').focus();
       }, 500);
     });
-
-    //$('.si-slider .slick-dots li button').attr('tabindex', -1);
 
     $('.si-slider .slick-dots li button').on('click contextmenu drag auxclick', function () {
       $('a, button, input').removeClass('tse-remove-border');
@@ -925,6 +922,35 @@
       $item.attr('data-opens', '');
       $content.attr('data-opens', '');
       $icon.css('transform', 'rotate(45deg)');
+    }
+  });
+
+  // FAQ Section New Accordion (2-column layout)
+  $(document).on('click', '[data-faq-accordion] [data-faq-accordion-trigger]', function () {
+    var $item = $(this).closest('.faq-section-new__accordion-item');
+    var $content = $item.find('[data-faq-accordion-content]');
+    var $header = $(this);
+
+    if ($item.is('[data-opens]')) {
+      // Close
+      $item.removeAttr('data-opens');
+      $content.removeAttr('data-opens');
+      $header.attr('aria-expanded', 'false');
+      $item.removeClass('is-open');
+    } else {
+      // Close siblings
+      $item.siblings('[data-opens]').each(function () {
+        $(this).removeAttr('data-opens');
+        $(this).find('[data-faq-accordion-content]').removeAttr('data-opens');
+        $(this).find('[data-faq-accordion-trigger]').attr('aria-expanded', 'false');
+        $(this).removeClass('is-open');
+      });
+
+      // Open clicked
+      $item.attr('data-opens', '');
+      $content.attr('data-opens', '');
+      $header.attr('aria-expanded', 'true');
+      $item.addClass('is-open');
     }
   });
 
@@ -1568,11 +1594,11 @@ jQuery(window).on('load', function () {
   AOS.init();
 });
 
-$(window).on('load', function () {
-  $('..osm-logo-slider').on('afterChange', function (event, slick, currentSlide) {
-    $('.slick-slide').removeAttr('aria-hidden');
-  });
-});
+// $(window).on('load', function () {
+//   $('..osm-logo-slider').on('afterChange', function (event, slick, currentSlide) {
+//     $('.slick-slide').removeAttr('aria-hidden');
+//   });
+// });
 
 /* ============================================
    HEADER NEW - Homepage JavaScript
@@ -1584,16 +1610,27 @@ $(window).on('load', function () {
    TESTIMONIAL VIDEO SECTION
    Mô tả: JavaScript cho video play button
    ============================================ */
-$(document).on('click', '[data-play-video]', function () {
-  var $wrapper = $(this).closest('.testimonial-video-section__video-wrapper');
-  var $video = $wrapper.find('video');
+// $(document).on('click', '[data-play-video]', function () {
+//   var $wrapper = $(this).closest('.testimonial-video-section__video-wrapper');
+//   var $video = $wrapper.find('video');
 
-  if ($video.length) {
-    $video[0].play();
-    $(this).hide();
-    $video.on('pause ended', function () {
-      $wrapper.find('[data-play-video]').show();
-    });
-  }
+//   if ($video.length) {
+//     $video[0].play();
+//     $(this).hide();
+//     $video.on('pause ended', function () {
+//       $wrapper.find('[data-play-video]').show();
+//     });
+//   }
+// });
+var swiper = new Swiper('.mySwiper', {
+  spaceBetween: 30,
+  loop: true,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
 });
-

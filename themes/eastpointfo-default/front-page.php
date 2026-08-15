@@ -36,8 +36,4 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 	</main><!-- #main -->
 
-</div><!-- #page-wrapper -->
-<div class="gdd-001-b" style="background-color: #f7f7f7;">
-		<?php get_template_part('parts/shared/contact-module'); ?>
-	</div>
 <?php get_footer(); ?>

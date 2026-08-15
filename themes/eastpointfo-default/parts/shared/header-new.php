@@ -154,14 +154,15 @@ function epf_is_menu_item_active($item, $current_path, $children, $all_child_url
                 </a>
 
                 <!-- Mobile Menu Toggle -->
-                <button class="header-new__mobile-toggle" id="header-new-mobile-toggle" aria-label="Toggle menu">
+              
+            </div>
+            <button class="header-new__mobile-toggle home-mobile" id="header-new-mobile-toggle" aria-label="Toggle menu">
                     <span class="header-new__hamburger">
                         <span></span>
                         <span></span>
                         <span></span>
                     </span>
                 </button>
-            </div>
         </div>
     </div>
 

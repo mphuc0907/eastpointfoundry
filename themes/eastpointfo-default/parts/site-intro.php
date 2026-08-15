@@ -18,12 +18,16 @@ $hhn_cta_secondary = get_field('hhn_cta_secondary');
 // Trust bar items
 $hhn_trust_icon1 = get_field('hhn_trust_icon1');
 $hhn_trust_text1 = get_field('hhn_trust_text1');
+$hhn_trust_text1_mobile = get_field('hhn_trust_text1_mobile');
 $hhn_trust_icon2 = get_field('hhn_trust_icon2');
 $hhn_trust_text2 = get_field('hhn_trust_text2');
+$hhn_trust_text2_mobile = get_field('hhn_trust_text2_mobile');
 $hhn_trust_icon3 = get_field('hhn_trust_icon3');
 $hhn_trust_text3 = get_field('hhn_trust_text3');
+$hhn_trust_text3_mobile = get_field('hhn_trust_text3_mobile');
 $hhn_trust_icon4 = get_field('hhn_trust_icon4');
 $hhn_trust_text4 = get_field('hhn_trust_text4');
+$hhn_trust_text4_mobile = get_field('hhn_trust_text4_mobile');
 
 // Parse italic words into array
 $italic_words_array = !empty($hhn_italic_words) ? array_map('trim', explode(',', $hhn_italic_words)) : array();
@@ -51,10 +55,10 @@ function epf_wrap_italic_words($text, $italic_words) {
 
 // Trust bar items array
 $trust_items = array(
-    array('icon' => $hhn_trust_icon1, 'text' => $hhn_trust_text1),
-    array('icon' => $hhn_trust_icon2, 'text' => $hhn_trust_text2),
-    array('icon' => $hhn_trust_icon3, 'text' => $hhn_trust_text3),
-    array('icon' => $hhn_trust_icon4, 'text' => $hhn_trust_text4),
+    array('icon' => $hhn_trust_icon1, 'text' => $hhn_trust_text1, 'text_mobile' => $hhn_trust_text1_mobile),
+    array('icon' => $hhn_trust_icon2, 'text' => $hhn_trust_text2, 'text_mobile' => $hhn_trust_text2_mobile),
+    array('icon' => $hhn_trust_icon3, 'text' => $hhn_trust_text3, 'text_mobile' => $hhn_trust_text3_mobile),
+    array('icon' => $hhn_trust_icon4, 'text' => $hhn_trust_text4, 'text_mobile' => $hhn_trust_text4_mobile),
 );
 
 // Background style
@@ -95,7 +99,7 @@ if ($hhn_background_type === 'video' && !empty($hhn_background_video)) {
 
                     <?php if (!empty($hhn_heading_line2)) : ?>
                         <span class="hero-banner__heading-line2">
-                            <?php echo epf_wrap_italic_words($hhn_heading_line2, $italic_words_array); ?>
+                            <?php echo $hhn_heading_line2; ?>
                         </span>
                     <?php endif; ?>
                 </div>
@@ -154,15 +158,26 @@ if ($hhn_background_type === 'video' && !empty($hhn_background_video)) {
                         </div>
                     <?php endif; ?>
 
-                    <?php
-                    $text_lines = explode("\n", $item['text']);
-                    ?>
-                    <p class="hero-banner__trust-text">
-                        <?php foreach ($text_lines as $index => $line) : ?>
-                            <?php echo esc_html(trim($line)); ?>
-                            <?php if ($index < count($text_lines) - 1) : ?><br><?php endif; ?>
-                        <?php endforeach; ?>
+                    <p class="hero-banner__trust-text hero-banner__trust-text--desktop">
+                        <?php
+                        $text_lines = explode("\n", $item['text']);
+                        foreach ($text_lines as $index => $line) :
+                            echo trim($line);
+                            if ($index < count($text_lines) - 1) echo '<br>';
+                        endforeach;
+                        ?>
                     </p>
+                    <?php if (!empty($item['text_mobile'])) : ?>
+                        <p class="hero-banner__trust-text hero-banner__trust-text--mobile">
+                            <?php
+                            $text_mobile_lines = explode("\n", $item['text_mobile']);
+                            foreach ($text_mobile_lines as $index => $line) :
+                                echo trim($line);
+                                if ($index < count($text_mobile_lines) - 1) echo '<br>';
+                            endforeach;
+                            ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>
