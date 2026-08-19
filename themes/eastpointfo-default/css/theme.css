@@ -37529,23 +37529,14 @@ a:hover {
   transition: transform 0.3s ease;
   transition: transform 0.3s ease, -webkit-transform 0.3s ease;
 }
-.testimonial-video-section__play-btn:hover {
-  -webkit-transform: scale(1.1);
-      -ms-transform: scale(1.1);
-          transform: scale(1.1);
-}
 .testimonial-video-section__play-btn svg {
   margin-left: 4px;
 }
 @media (max-width: 991.98px) {
   .testimonial-video-section__play-btn {
-    width: 24px;
-    height: 24px;
-    border-radius: 12px;
+    border-radius: 50%;
   }
   .testimonial-video-section__play-btn svg {
-    width: 12px;
-    height: 12px;
     margin-left: 2px;
   }
 }
