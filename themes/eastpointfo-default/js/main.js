@@ -1600,28 +1600,57 @@ jQuery(window).on('load', function () {
 //   });
 // });
 
-/* ============================================
-   HEADER NEW - Homepage JavaScript
-   Mô tả: JavaScript cho header navigation mới
-   Bao gồm: Mobile menu + Scroll behavior (is-scrolled class)
-   ============================================ */
+// Video Play/Pause functionality
+jQuery(document).on('click', '[data-play-video]', function (e) {
+  e.preventDefault();
+  e.stopPropagation();
 
-/* ============================================
-   TESTIMONIAL VIDEO SECTION
-   Mô tả: JavaScript cho video play button
-   ============================================ */
-// $(document).on('click', '[data-play-video]', function () {
-//   var $wrapper = $(this).closest('.testimonial-video-section__video-wrapper');
-//   var $video = $wrapper.find('video');
+  console.log('[VIDEO] Click detected on play button');
 
-//   if ($video.length) {
-//     $video[0].play();
-//     $(this).hide();
-//     $video.on('pause ended', function () {
-//       $wrapper.find('[data-play-video]').show();
-//     });
-//   }
-// });
+  var $btn = jQuery(this);
+  var $wrapper = $btn.closest('.testimonial-video-section__video-wrapper');
+  var $video = $wrapper.find('video');
+
+  console.log('[VIDEO] $video.length:', $video.length);
+
+  if (!$video.length) {
+    console.warn('[VIDEO] Không tìm thấy thẻ video trong wrapper');
+    return;
+  }
+
+  var videoEl = $video[0];
+
+  // Play video
+  var playPromise = videoEl.play();
+
+  if (playPromise !== undefined) {
+    playPromise
+      .then(function () {
+        console.log('[VIDEO] Play started successfully');
+        $btn.hide();
+      })
+      .catch(function (err) {
+        console.error('[VIDEO] video.play() bị chặn/lỗi:', err);
+      });
+  } else {
+    console.log('[VIDEO] Play started (no promise)');
+    $btn.hide();
+  }
+});
+
+// Click on video to pause
+jQuery(document).on('click', '.testimonial-video-section__video', function () {
+  var videoEl = this;
+  var $wrapper = jQuery(this).closest('.testimonial-video-section__video-wrapper');
+  var $btn = $wrapper.find('[data-play-video]');
+
+  console.log('[VIDEO] Click on video - paused:', videoEl.paused);
+
+  if (!videoEl.paused) {
+    videoEl.pause();
+    $btn.show();
+  }
+});
 var swiper = new Swiper('.mySwiper', {
   spaceBetween: 30,
   loop: true,
