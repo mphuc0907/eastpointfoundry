@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Header - East Point Foundry Homepage
  */
@@ -45,7 +46,8 @@ if ($is_single_post) {
 }
 
 // Helper function to check if item is active
-function epf_is_menu_item_active($item, $current_path, $children, $all_child_urls, $all_child_term_ids, $current_post_categories) {
+function epf_is_menu_item_active($item, $current_path, $children, $all_child_urls, $all_child_term_ids, $current_post_categories)
+{
     $item_path = rtrim(str_replace(home_url(), '', $item->url), '/');
 
     // Direct match
@@ -105,7 +107,7 @@ function epf_is_menu_item_active($item, $current_path, $children, $all_child_url
                                 <span><?php echo esc_html($item->title); ?></span>
                                 <?php if ($has_children) : ?>
                                     <svg class="header-new__chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 <?php endif; ?>
                             </a>
@@ -149,20 +151,23 @@ function epf_is_menu_item_active($item, $current_path, $children, $all_child_url
                 </a>
 
                 <!-- CTA Button - Mobile/Tablet: "R. Quote" -->
+
+
+                <!-- Mobile Menu Toggle -->
+
+            </div>
+            <div class="menu-mobile-nav_cta">
                 <a href="#contact" class="header-new__cta header-new__cta--mobile">
                     R. Quote
                 </a>
-
-                <!-- Mobile Menu Toggle -->
-              
-            </div>
-            <button class="header-new__mobile-toggle home-mobile" id="header-new-mobile-toggle" aria-label="Toggle menu">
+                <button class="header-new__mobile-toggle" id="header-new-mobile-toggle" aria-label="Toggle menu">
                     <span class="header-new__hamburger">
                         <span></span>
                         <span></span>
                         <span></span>
                     </span>
                 </button>
+            </div>
         </div>
     </div>
 
@@ -181,7 +186,7 @@ function epf_is_menu_item_active($item, $current_path, $children, $all_child_url
                             <?php if ($has_children) : ?>
                                 <button class="header-new__mobile-submenu-toggle" aria-label="Toggle submenu">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </button>
                             <?php endif; ?>
