@@ -6601,8 +6601,8 @@ button.mfp-arrow {
 	color: #1A1613 !important;
 	opacity: 0.6;
 	font-variant-numeric: slashed-zero;
-	font-family: 'Stack Sans Text', sans-serif !important ;
-	font-size: var(--font-size-body-body-large, 18px) !important ;
+	font-family: 'Stack Sans Text', sans-serif !important;
+	font-size: var(--font-size-body-body-large, 18px) !important;
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
@@ -9988,7 +9988,7 @@ $header-new-dark-color: #1a1613;
 		text-decoration: none;
 		font-family: $header-new-font;
 		font-size: 16px;
-		font-weight: 300; 
+		font-weight: 300;
 		line-height: normal;
 		letter-spacing: 0;
 		transition: opacity 0.2s ease;
@@ -10008,13 +10008,10 @@ $header-new-dark-color: #1a1613;
 
 			&::after,
 			&::before {
-				@include media-breakpoint-up(md) {
+				@include media-breakpoint-down(lg) {
 					background-color: #1A1613;
 				}
 
-				@include media-breakpoint-down(sm){
-					background-color: #1A1613;
-				}
 			}
 		}
 	}
@@ -10156,7 +10153,7 @@ $header-new-dark-color: #1a1613;
 	}
 
 	// Desktop CTA - "Contact Us" - hidden on mobile
-	&__cta--desktop {	
+	&__cta--desktop {
 		display: block;
 
 		@include media-breakpoint-down(md) {
@@ -10189,9 +10186,10 @@ $header-new-dark-color: #1a1613;
 		@include media-breakpoint-down(md) {
 			display: flex;
 		}
+
 		@include media-breakpoint-down(sm) {
 			margin-left: 0;
-		}	
+		}
 	}
 
 	// Hamburger icon - 3 bars, 30px wide, 3px height, gap 6px
@@ -10467,11 +10465,13 @@ $header-new-dark-color: #1a1613;
 			transform: translateY(-2px);
 		}
 	}
+
 	.menu-mobile-nav_cta {
 		display: flex;
-		gap: 15px; 
+		gap: 15px;
 		align-items: center;
 	}
+
 	// Icon Button (Search & Language)
 	&__icon-btn {
 		display: flex;
@@ -10558,7 +10558,7 @@ $header-new-dark-color: #1a1613;
 				border-color: #181818;
 				color: #181818;
 			}
-			
+
 		}
 	}
 
@@ -10590,12 +10590,14 @@ $header-new-dark-color: #1a1613;
 			display: block;
 		}
 
-		@include media-breakpoint-up(xl) {
+		@include media-breakpoint-up(lg) {
 			display: none !important;
 		}
+
 		@include media-breakpoint-down(md) {
 			margin-top: 90px;
 		}
+
 		@include media-breakpoint-down(sm) {
 			margin-top: 80px;
 		}
@@ -10667,11 +10669,23 @@ $header-new-dark-color: #1a1613;
 		}
 
 		.header-new__cta {
-			@include media-breakpoint-down(sm) {
+
+			border: 2px solid $header-new-dark-color;
+			background: rgba(24, 24, 24, 0.80);
+			color: white;
+
+			&:hover,
+			&:focus {
+				background: rgba(24, 24, 24, 0.9);
+				text-decoration: none;
+				color: #fff;
+			}
+
+			@include media-breakpoint-down(lg) {
 				border: 2px solid $header-new-dark-color;
 				background: rgba(24, 24, 24, 0.80);
 				color: white;
-	
+
 				&:hover,
 				&:focus {
 					background: rgba(24, 24, 24, 0.9);
@@ -10680,19 +10694,6 @@ $header-new-dark-color: #1a1613;
 				}
 			}
 
-			@include media-breakpoint-down(sm) {
-				border: 2px solid $header-new-dark-color;
-				background: rgba(24, 24, 24, 0.80);
-				color: white;
-	
-				&:hover,
-				&:focus {
-					background: rgba(24, 24, 24, 0.9);
-					text-decoration: none;
-					color: #fff;
-				}
-			}
- 			
 		}
 
 
@@ -10710,13 +10711,7 @@ $header-new-dark-color: #1a1613;
 		}
 
 		.header-new__hamburger span {
-			@include media-breakpoint-up(lg) {
-				background: $header-new-dark-color;
-			}
-			@include media-breakpoint-down(sm) {
-				background: $header-new-dark-color;
-			}
-			
+			background: $header-new-dark-color;
 		}
 
 		.header-new__dropdown-content {
@@ -10912,15 +10907,7 @@ $header-new-dark-color: #1a1613;
 
 // Mobile menu active state (scrolled)
 .header-new.is-scrolled {
-	@include media-breakpoint-up(md) {
-		background: #fff;
-	}
-	@include media-breakpoint-down(md) {
-		background: linear-gradient(180deg, rgba(0, 0, 0, 0.60) -23.75%, rgba(0, 0, 0, 0.00) 100%), rgba(255, 255, 255, 0.01);
-	}
-	@include media-breakpoint-down(sm) {
-		background: #fff;
-	}
+	background: #fff;
 
 	.header-new__mobile-menu-item {
 		&-link {
@@ -13403,7 +13390,8 @@ section a {
 
 			.slick-track {
 				padding-top: 10px;
-				padding-bottom: 10px; 
+				padding-bottom: 10px;
+
 				@include media-breakpoint-down(sm) {
 					padding-top: 0;
 					padding-bottom: 0;
@@ -13793,7 +13781,7 @@ section a {
 		}
 	}
 
-	// Main heading
+	// Main heading 
 	&__heading {
 		font-family: 'IBM Plex Sans', sans-serif;
 		font-size: 42px;
@@ -13803,6 +13791,10 @@ section a {
 		font-feature-settings: '"zero" 1';
 		line-height: normal;
 		text-transform: none;
+
+		@include media-breakpoint-down(lg) {
+			font-size: 40px;
+		}
 
 		@include media-breakpoint-down(sm) {
 			font-size: 28px;
@@ -14252,6 +14244,7 @@ section a {
 		line-height: normal;
 		text-transform: uppercase;
 		margin-bottom: 0;
+
 		@include media-breakpoint-down(sm) {
 			color: var(--Brand-Primary, #1A5C5E);
 			font-family: var(--font-family-body, "Stack Sans Text");
@@ -14507,6 +14500,7 @@ section a {
 					margin-left: 4px !important;
 				}
 			}
+
 			.gfield--type-select {
 				flex-direction: row;
 			}
@@ -14536,7 +14530,7 @@ section a {
 					width: 100% !important;
 					height: auto !important;
 					line-height: normal !important;
-					border-radius: 0 !important; 
+					border-radius: 0 !important;
 
 					&::placeholder {
 						opacity: 0.6 !important;
@@ -15030,6 +15024,7 @@ a:hover {
 				visibility: visible;
 			}
 		}
+
 		@include media-breakpoint-down(sm) {
 			gap: 20px;
 		}
@@ -15392,11 +15387,13 @@ a:hover {
 		display: flex;
 		gap: 60px;
 		align-items: center;
+
 		@include media-breakpoint-down(lg) {
 			flex-direction: column;
 			padding: 0;
 			gap: 0px;
 		}
+
 		@include media-breakpoint-down(sm) {
 			padding: 0 20px;
 			gap: 60px;
@@ -15410,16 +15407,18 @@ a:hover {
 		gap: 40px;
 		padding: 80px;
 		padding-right: 0;
+
 		@include media-breakpoint-down(lg) {
 			width: 100%;
 			padding: 40px 60px;
 			padding-right: 60px;
-		} 
+		}
+
 		@include media-breakpoint-down(sm) {
 			width: 100%;
 			padding: 40px 0;
 			padding-right: 0;
-		} 
+		}
 	}
 
 	&__header {
@@ -15436,7 +15435,7 @@ a:hover {
 		text-transform: uppercase;
 		margin: 0;
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(sm) {
 			font-size: 16px;
 		}
 	}
@@ -15449,7 +15448,8 @@ a:hover {
 		margin: 0;
 		line-height: normal;
 		text-transform: capitalize;
-		@include media-breakpoint-down(md) {
+
+		@include media-breakpoint-down(sm) {
 			font-size: 28px;
 		}
 	}
@@ -15522,7 +15522,7 @@ a:hover {
 		gap: 4px;
 		min-width: 105px;
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(sm) {
 			min-width: 80px;
 			text-align: center;
 			align-items: center;
@@ -15536,7 +15536,7 @@ a:hover {
 		color: #ad8831;
 		line-height: normal;
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(sm) {
 			font-size: 28px;
 		}
 	}
@@ -15548,7 +15548,7 @@ a:hover {
 		color: #ad8831;
 		line-height: normal;
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(sm) {
 			font-size: 18px;
 		}
 	}
@@ -15558,11 +15558,13 @@ a:hover {
 		position: relative;
 		min-width: 50%;
 		align-self: stretch;
+
 		@include media-breakpoint-down(lg) {
 			width: 100%;
-			flex: unset; 
+			flex: unset;
 			height: 364.64px;
 		}
+
 		@include media-breakpoint-down(sm) {
 			display: none;
 		}
@@ -15571,6 +15573,14 @@ a:hover {
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
+
+			@include media-breakpoint-down(lg) {
+				object-position: 50% 80%;
+			}
+
+			@include media-breakpoint-down(sm) {
+				object-position: 50% 50%;
+			}
 		}
 
 		&--mobile {
@@ -15653,11 +15663,13 @@ a:hover {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+
 		@include media-breakpoint-down(lg) {
 			width: 100%;
 			aspect-ratio: 964 / 562;
 			height: 386.167px;
 		}
+
 		@include media-breakpoint-down(sm) {
 			width: 100%;
 			aspect-ratio: 964 / 562;
@@ -15772,6 +15784,7 @@ a:hover {
 		text-transform: uppercase;
 		letter-spacing: 0;
 		margin-bottom: 0;
+
 		@include media-breakpoint-down(sm) {
 			font-size: 16px;
 			margin-bottom: 0;
@@ -16009,6 +16022,7 @@ a:hover {
 		line-height: normal;
 		font-feature-settings: 'zero' 1;
 		text-transform: capitalize;
+
 		@include media-breakpoint-down(md) {
 			font-size: 28px;
 		}
@@ -16044,6 +16058,11 @@ a:hover {
 		&:hover {
 			background: rgba(24, 24, 24, 0.1);
 			text-decoration: none;
+		}
+
+		@include media-breakpoint-down(lg) {
+			height: fit-content;
+			line-height: normal;
 		}
 
 		@include media-breakpoint-down(sm) {
